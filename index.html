@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#5C1D24">
+    <title>Saloni & Sahil | Wedding Celebration</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="invitation-bg.jpg">
+    <script>document.documentElement.classList.add('js');</script>
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --rose-pink: #E8A598;
+            --soft-pink: #FFF5F5;
+            --deep-maroon: #5C1D24;
+            --text-dark: #333333;
+            --bg-light: #FAF8F5;
+            --paper: #E4E2CF;
+            --ease-out: cubic-bezier(.2, .7, .2, 1);
+
+            /* First-page illustration (change the file name here if you swap the image) */
+            --hero-img: url('invitation-bg.jpg');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            text-align: center;
+            line-height: 1.6;
+            overflow-x: hidden;
+            overflow-wrap: break-word;
+        }
+
+        /* ---------- Keyframes ---------- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulseGlow {
+            0%   { box-shadow: 0 0 5px rgba(212, 175, 55, 0.4); }
+            50%  { box-shadow: 0 0 22px rgba(212, 175, 55, 0.85); }
+            100% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.4); }
+        }
+        @keyframes monoIn {
+            from { opacity: 0; transform: scale(.3) rotate(-180deg); }
+            to   { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+        @keyframes titleIn {
+            from { opacity: 0; transform: scale(.85); filter: blur(12px); }
+            to   { opacity: 1; transform: scale(1);   filter: blur(0); }
+        }
+        @keyframes floatY {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-6px); }
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes popIn {
+            from { opacity: 0; transform: translateY(24px) scale(.7); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes tick {
+            from { opacity: 0; transform: translateY(-45%); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes growLine {
+            from { width: 0; }
+            to   { width: 80px; }
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15%      { transform: scale(1.18); }
+            30%      { transform: scale(1); }
+            45%      { transform: scale(1.12); }
+            60%      { transform: scale(1); }
+        }
+        @keyframes bob {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50%      { transform: translateY(-6px) rotate(6deg); }
+        }
+        @keyframes petalFall {
+            0%   { transform: translate3d(0, -40px, 0) rotate(0deg); opacity: 0; }
+            8%   { opacity: .8; }
+            25%  { transform: translate3d(var(--sway), calc(var(--h) * .25), 0) rotate(90deg); }
+            50%  { transform: translate3d(calc(var(--sway) * -.6), calc(var(--h) * .5), 0) rotate(200deg); }
+            75%  { transform: translate3d(var(--sway), calc(var(--h) * .75), 0) rotate(290deg); }
+            92%  { opacity: .8; }
+            100% { transform: translate3d(calc(var(--sway) * -.4), calc(var(--h) + 40px), 0) rotate(380deg); opacity: 0; }
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(.4); }
+            50%      { opacity: 1; transform: scale(1.2); }
+        }
+        @keyframes ringPulse {
+            0%   { transform: scale(1);   opacity: .8; }
+            100% { transform: scale(1.7); opacity: 0; }
+        }
+        @keyframes btnIn {
+            from { opacity: 0; transform: scale(0); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 1px 0 rgba(255,255,255,.7), 0 2px 12px rgba(255,255,255,.7), 0 0 0 rgba(212,175,55,0); }
+            50%      { text-shadow: 0 1px 0 rgba(255,255,255,.7), 0 2px 12px rgba(255,255,255,.7), 0 0 20px rgba(212,175,55,.6); }
+        }
+
+        /* ---------- Scroll progress bar ---------- */
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            z-index: 10000;
+        }
+
+        /* ---------- Scroll reveal ---------- */
+        .js .reveal {
+            opacity: 0;
+            transform: translateY(34px);
+            transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
+            transition-delay: var(--d, 0s);
+        }
+        .js .reveal.from-left  { transform: translateX(-50px); }
+        .js .reveal.from-right { transform: translateX(50px); }
+        .js .reveal.zoom       { transform: scale(.8); }
+        .js .reveal.soft       { transform: scale(.96); }
+        .js .reveal.visible    { opacity: 1; transform: none; }
+
+        /* ---------- First page (full illustration, never cropped) ---------- */
+        header {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            background-color: var(--paper);
+            border-bottom: 5px solid var(--primary-gold);
+        }
+
+        /* Soft blurred copy of the art that fills the sides on wide screens */
+        header::before {
+            content: '';
+            position: absolute;
+            inset: -40px;
+            z-index: 0;
+            background: var(--hero-img) center / cover no-repeat;
+            filter: blur(22px);
+            opacity: .85;
+        }
+
+        /*
+           The card keeps the illustration's exact shape (1152 x 2048), so the whole
+           picture is always visible. --u is 1% of the card width, so text scales with it.
+        */
+        .hero {
+            --u: min(1vw, 5.2px);
+            position: relative;
+            z-index: 1;
+            width: min(100%, 520px);
+            margin: 0 auto;
+            aspect-ratio: 1152 / 2048;
+            background: var(--paper) var(--hero-img) center / cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: calc(var(--u) * 14);
+            overflow: hidden;
+        }
+        .hero > *:not(.fx) {
+            position: relative;
+            z-index: 2;
+        }
+        .hero > .fx {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+            --h: 924px;
+        }
+
+        .blessing {
+            font-family: 'Cinzel', serif;
+            font-size: calc(var(--u) * 3.1);
+            font-weight: 600;
+            color: var(--deep-maroon);
+            letter-spacing: calc(var(--u) * .35);
+            line-height: 1.3;
+            white-space: nowrap;
+            margin-bottom: calc(var(--u) * 1.2);
+            text-shadow: 0 1px 6px rgba(255, 255, 255, .85);
+            animation: fadeInDown 1s var(--ease-out) .2s both;
+        }
+
+        .monogram {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: calc(var(--u) * 6);
+            color: var(--primary-gold);
+            border: 2px solid var(--primary-gold);
+            width: calc(var(--u) * 15);
+            height: calc(var(--u) * 15);
+            border-radius: 50%;
+            margin: calc(var(--u) * 1.6) auto calc(var(--u) * 2.4);
+            background: var(--deep-maroon);
+            animation: monoIn 1.1s var(--ease-out) .5s both, pulseGlow 3s ease-in-out 1.8s infinite;
+        }
+        .monogram img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+        .monogram::after {
+            content: '';
+            position: absolute;
+            inset: calc(var(--u) * -1.5);
+            border: 1px dashed var(--primary-gold);
+            border-radius: 50%;
+            animation: spin 20s linear infinite;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: calc(var(--u) * 12.5);
+            line-height: 1.1;
+            white-space: nowrap;
+            color: var(--deep-maroon);
+            margin: 0;
+            text-shadow: 0 1px 0 rgba(255,255,255,.7), 0 2px 12px rgba(255,255,255,.7);
+            animation: titleIn 1.4s var(--ease-out) .9s both,
+                       floatY 6s ease-in-out 2.4s infinite,
+                       textGlow 5s ease-in-out 2.4s infinite;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #4A2F2F;
+            width: calc(var(--u) * 80);
+            max-width: 100%;
+            margin: calc(var(--u) * 1.5) auto 0;
+            font-size: calc(var(--u) * 3.05);
+            line-height: 1.45;
+            text-shadow: 0 1px 6px rgba(255, 255, 255, .9);
+            animation: fadeInUp 1s var(--ease-out) 1.5s both;
+        }
+
+        /* Countdown */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            gap: calc(var(--u) * 2.2);
+            margin-top: calc(var(--u) * 2.4);
+        }
+
+        .countdown-box {
+            width: calc(var(--u) * 15.5);
+            padding: calc(var(--u) * 1.6) 0 calc(var(--u) * 1.4);
+            background: rgba(92, 29, 36, 0.92);
+            border: 1px solid var(--primary-gold);
+            border-radius: calc(var(--u) * 1.6);
+            box-shadow: 0 4px 10px rgba(92, 29, 36, 0.35);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            animation: popIn .7s cubic-bezier(.2, 1.4, .4, 1) calc(1.9s + var(--i, 0) * .13s) both;
+        }
+
+        .countdown-box span {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: calc(var(--u) * 5.4);
+            line-height: 1.15;
+            font-weight: 700;
+            color: var(--primary-gold);
+        }
+        .countdown-box span.tick { animation: tick .45s var(--ease-out); }
+
+        .countdown-box .label {
+            font-size: max(8.5px, calc(var(--u) * 2.3));
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: #fff;
+            margin-top: 2px;
+        }
+
+        /* Falling petals + sparkles */
+        .petal {
+            position: absolute;
+            top: 0;
+            left: var(--x);
+            width: var(--s);
+            height: calc(var(--s) * 1.3);
+            background: var(--c);
+            border-radius: 150% 0 150% 0;
+            opacity: 0;
+            animation: petalFall var(--dur) linear var(--delay) infinite;
+            will-change: transform;
+        }
+        .spark {
+            position: absolute;
+            left: var(--x);
+            top: var(--y);
+            width: var(--s);
+            height: var(--s);
+            background: #C9A227;
+            border-radius: 50%;
+            box-shadow: 0 0 8px 2px rgba(212, 175, 55, .9);
+            opacity: 0;
+            animation: twinkle var(--dur) ease-in-out var(--delay) infinite;
+        }
+
+        .fx.paused .petal,
+        .fx.paused .spark { animation-play-state: paused; }
+
+        /* ---------- Family details ---------- */
+        .family-section {
+            padding: 60px 20px;
+            background-color: #ffffff;
+            width: calc(100% - 32px);
+            max-width: 900px;
+            margin: 40px auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+            z-index: 10;
+            animation: fadeInUp 1.2s var(--ease-out) .4s both;
+        }
+
+        .couple-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .person-card {
+            flex: 1;
+            min-width: 260px;
+            transition: transform 0.3s ease;
+        }
+
+        .person-card h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.2rem;
+            color: var(--deep-maroon);
+        }
+
+        .details {
+            font-size: 0.95rem;
+            color: #555;
+            margin-top: 10px;
+        }
+        .details p + p { margin-top: 6px; }
+
+        .with-divider {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: var(--primary-gold);
+            flex: 0 0 100%;
+            text-align: center;
+            margin: 5px 0;
+        }
+        .with-divider span {
+            display: inline-block;
+            animation: heartbeat 2.6s ease-in-out infinite;
+        }
+
+        @media (min-width: 768px) {
+            .with-divider { flex: 0 0 auto; margin: 0; }
+        }
+
+        /* ---------- Events: one full illustrated page per celebration ---------- */
+        .events-intro {
+            padding: 50px 20px 34px;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--deep-maroon);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--primary-gold);
+            margin: 10px auto 0;
+        }
+        .js .section-title::after { width: 0; }
+        .js .section-title.in-view::after { animation: growLine 1s var(--ease-out) .4s both; }
+
+        /* Each page keeps its illustration's exact shape, so the whole picture is always visible */
+        .event-page {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            background-color: var(--paper);
+            border-top: 5px solid var(--primary-gold);
+            border-bottom: 5px solid var(--primary-gold);
+            box-shadow: 0 14px 36px rgba(92, 29, 36, 0.22);
+        }
+        .event-page::before {
+            content: '';
+            position: absolute;
+            inset: -40px;
+            z-index: 0;
+            background: var(--page-img) center / cover no-repeat;
+            filter: blur(22px);
+            opacity: .85;
+        }
+
+        .page-card {
+            --u: min(1vw, 5.2px);
+            position: relative;
+            z-index: 1;
+            width: min(100%, 520px);
+            margin: 0 auto;
+            aspect-ratio: var(--ratio);
+            background: var(--paper) var(--page-img) center / cover no-repeat;
+            overflow: hidden;
+        }
+        .page-card > .fx {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+            --h: 924px;
+        }
+
+        /* The open area of each illustration where the text lives (set per page) */
+        .page-safe {
+            --s: calc(var(--u) * var(--k, 1));
+            position: absolute;
+            z-index: 2;
+            left: var(--l);
+            right: var(--r);
+            top: var(--t);
+            bottom: var(--b);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .icon-wrap { margin-bottom: calc(var(--s) * 1); }
+        .event-icon {
+            font-size: calc(var(--s) * 7.5);
+            line-height: 1.1;
+            display: inline-block;
+            animation: bob 3.2s ease-in-out calc(var(--i, 0) * .5s) infinite;
+        }
+
+        .page-safe h3 {
+            font-family: 'Great Vibes', cursive;
+            font-weight: 400;
+            font-size: calc(var(--s) * 10.5);
+            line-height: 1.05;
+            color: var(--deep-maroon);
+            text-wrap: balance;
+            text-shadow: 0 1px 0 rgba(255,255,255,.7), 0 2px 10px rgba(255,255,255,.7);
+        }
+        .event-date {
+            font-weight: 600;
+            font-size: calc(var(--s) * 3.6);
+            line-height: 1.35;
+            letter-spacing: .01em;
+            color: #9A7414;
+            margin-top: calc(var(--s) * 1.8);
+            text-shadow: 0 1px 6px rgba(255,255,255,.85);
+        }
+        .event-time {
+            font-size: calc(var(--s) * 3.4);
+            line-height: 1.4;
+            color: #4A2F2F;
+            margin-top: calc(var(--s) * .5);
+            text-shadow: 0 1px 6px rgba(255,255,255,.85);
+        }
+        .event-details {
+            font-size: calc(var(--s) * 3.4);
+            font-style: italic;
+            line-height: 1.4;
+            color: #5A4444;
+            text-wrap: balance;
+            margin-top: calc(var(--s) * .5);
+            text-shadow: 0 1px 6px rgba(255,255,255,.85);
+        }
+        .event-venue {
+            font-size: calc(var(--s) * 3.1);
+            line-height: 1.4;
+            color: #5A4444;
+            max-width: calc(var(--s) * 46);
+            margin-top: calc(var(--s) * 2.6);
+            padding-top: calc(var(--s) * 1.8);
+            border-top: 1px solid rgba(154, 116, 20, .45);
+            text-wrap: balance;
+            text-shadow: 0 1px 6px rgba(255,255,255,.85);
+        }
+
+        /* Breathing space + ornament between the event pages */
+        .page-gap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 46px 20px;
+            color: var(--primary-gold);
+        }
+        .page-gap::before,
+        .page-gap::after {
+            content: '';
+            width: min(24vw, 110px);
+            height: 1px;
+            background: var(--primary-gold);
+            opacity: .8;
+        }
+        .page-gap span {
+            display: inline-block;
+            font-size: 1.4rem;
+            line-height: 1;
+            animation: spin 14s linear infinite;
+        }
+
+        /* ---------- Wishes ---------- */
+        .wishes-section {
+            background-color: var(--soft-pink);
+            padding: 60px 20px;
+            border-top: 1px solid #f0d5d0;
+        }
+        .wishes-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .wish-group {
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+        }
+        .wish-group h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--deep-maroon);
+            margin-bottom: 8px;
+        }
+        .wish-group p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* ---------- Footer ---------- */
+        footer {
+            background-color: var(--deep-maroon);
+            color: #ffffff;
+            padding: 30px 20px calc(30px + env(safe-area-inset-bottom, 0px));
+            font-size: 0.9rem;
+        }
+        footer p {
+            color: var(--primary-gold);
+            letter-spacing: 1px;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        /* ---------- Music button ---------- */
+        .music-btn {
+            position: fixed;
+            bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+            right: calc(20px + env(safe-area-inset-right, 0px));
+            width: 54px;
+            height: 54px;
+            background-color: var(--deep-maroon);
+            color: var(--primary-gold);
+            border: 2px solid var(--primary-gold);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            z-index: 9999;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            animation: btnIn .6s cubic-bezier(.2, 1.4, .4, 1) 2.6s both;
+        }
+        .music-btn::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border: 2px solid var(--primary-gold);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: ringPulse 2s ease-out 3.2s infinite;
+        }
+        .music-btn.playing::after { display: none; }
+        .music-btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+        /* Hover effects only on devices that actually hover (not touch phones) */
+        @media (hover: hover) {
+            .countdown-box:hover { transform: translateY(-5px); }
+            .person-card:hover   { transform: translateY(-5px); }
+            .wish-group:hover { transform: scale(1.02); }
+            .music-btn:hover {
+                transform: scale(1.15) rotate(10deg);
+                background-color: #43131a;
+                box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+            }
+        }
+
+        /* ---------- Tablets & phones ---------- */
+        @media (max-width: 768px) {
+            .family-section {
+                padding: 45px 18px;
+                margin: 30px auto;
+            }
+            .events-intro { padding: 40px 16px 26px; }
+            .section-title { font-size: 1.7rem; }
+            .wishes-section { padding: 45px 18px; }
+        }
+
+        /* On phones the card already fills the screen width, so the blurred backdrop isn't needed */
+        @media (max-width: 560px) {
+            header::before { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .person-card { min-width: 0; flex: 1 1 100%; }
+            .person-card h2 { font-size: 2.7rem; }
+            .with-divider { font-size: 2.3rem; }
+            .details { font-size: .9rem; }
+
+            .section-title { font-size: 1.45rem; letter-spacing: 1px; }
+            footer { font-size: .8rem; }
+        }
+
+        /* ---------- Respect reduced-motion settings ---------- */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .fx { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="progress" aria-hidden="true"></div>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="GEHRA HUA.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <button id="musicToggle" class="music-btn" title="Play / Pause Music" aria-label="Play music" aria-pressed="false">▶</button>
+
+    <!-- First page: the whole illustration is visible, text sits in its open space -->
+    <header>
+        <div class="hero">
+            <div class="fx" id="fx" aria-hidden="true"></div>
+
+            <div class="blessing">|| Shree Ganeshaya Namah ||</div>
+            <div class="monogram">
+                ॐ
+                <img src="Ganeshji.jpg"
+                     alt="Lord Ganesha" onerror="this.style.display='none'">
+            </div>
+            <h1>Saloni & Sahil</h1>
+            <p class="quote">"Destiny brought them together and now love will seal their bond... forever.<br>Please join us to celebrate the wedding of our beloved."</p>
+
+            <div class="countdown-container">
+                <div class="countdown-box" style="--i:0">
+                    <span id="days">00</span>
+                    <div class="label">Days</div>
+                </div>
+                <div class="countdown-box" style="--i:1">
+                    <span id="hours">00</span>
+                    <div class="label">Hours</div>
+                </div>
+                <div class="countdown-box" style="--i:2">
+                    <span id="minutes">00</span>
+                    <div class="label">Mins</div>
+                </div>
+                <div class="countdown-box" style="--i:3">
+                    <span id="seconds">00</span>
+                    <div class="label">Secs</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Family Details -->
+    <section class="family-section">
+        <div class="couple-container">
+            <div class="person-card reveal from-left">
+                <h2>Saloni</h2>
+                <div class="details">
+                    <p><strong>Granddaughter</strong> of Late Smt. Sheela Devi Rohira & Late Shri. Mohanlal Ji Rohira</p>
+                    <p><strong>Daughter of:</strong> Smt. Nisha & Shri. Deepak Rohira</p>
+                </div>
+            </div>
+
+            <div class="with-divider reveal zoom" style="--d:.25s"><span>With</span></div>
+
+            <div class="person-card reveal from-right" style="--d:.15s">
+                <h2>Sahil</h2>
+                <div class="details">
+                    <p><strong>Grandson</strong> of Smt. Meera Bai Bajaj & Late Shri. Lajpat Rai ji Bajaj</p>
+                    <p><strong>Son of:</strong> Smt. Riya Ji & Shri. Kamal Ji Bajaj</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule of Events: one full page per celebration -->
+    <section class="events-intro">
+        <h2 class="section-title reveal">Wedding Celebrations</h2>
+    </section>
+
+    <!-- Page 1: Ring & Rhythms (engagement) -->
+    <section class="event-page"
+             style="--page-img:url('event-engagement.jpg'); --ratio:1152 / 2048; --paper:#F6ECE4; --l:16%; --r:16%; --t:20%; --b:37%; --k:1.1;">
+        <div class="page-card reveal soft" data-petals="#F4B6C2,#F9D5DC,#E8A598,#D4AF37,#FFD9A0">
+            <div class="fx" aria-hidden="true"></div>
+            <div class="page-safe">
+                <h3 class="reveal" style="--d:.1s">Ring & Rhythms</h3>
+                <p class="event-date reveal" style="--d:.2s">Friday, 23rd October 2026</p>
+                <p class="event-time reveal" style="--d:.3s">08:30 PM onwards</p>
+                <p class="event-details reveal" style="--d:.4s">An Evening To Remember</p>
+                <p class="event-venue reveal" style="--d:.5s">📍 Hari Priya Resort, Udaipur (Rajasthan)</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="page-gap reveal zoom" aria-hidden="true"><span>❖</span></div>
+
+    <!-- Page 2: Wedding Vows (wedding) -->
+    <section class="event-page"
+             style="--page-img:url('event-wedding.jpg'); --ratio:736 / 1318; --paper:#E9E6D6; --l:17%; --r:17%; --t:17%; --b:47%; --k:1.05;">
+        <div class="page-card reveal soft" data-petals="#F4B6C2,#F7C6C0,#FFD9A0,#D4AF37,#C9B8E8">
+            <div class="fx" aria-hidden="true"></div>
+            <div class="page-safe">
+                <h3 class="reveal" style="--d:.1s">Wedding Vows</h3>
+                <p class="event-date reveal" style="--d:.2s">Saturday, 24th October 2026</p>
+                <p class="event-time reveal" style="--d:.3s">02:30 PM onwards</p>
+                <p class="event-details reveal" style="--d:.4s">Sealed With Love And Celebration</p>
+                <p class="event-venue reveal" style="--d:.5s">📍 Hari Priya Resort, Udaipur (Rajasthan)</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="page-gap reveal zoom" aria-hidden="true"><span>❖</span></div>
+
+    <!-- Page 3: Reception & Dinner (reception) -->
+    <section class="event-page"
+             style="--page-img:url('event-reception.jpg'); --ratio:1024 / 1536; --paper:#F6EFE3; --l:19%; --r:19%; --t:19%; --b:45%; --k:.9;">
+        <div class="page-card reveal soft" data-petals="#7FC8CF,#A8DCE0,#5FA8B8,#D4AF37,#CFE9EC">
+            <div class="fx" aria-hidden="true"></div>
+            <div class="page-safe">
+                <h3 class="reveal" style="--d:.1s">Reception & Dinner</h3>
+                <p class="event-date reveal" style="--d:.2s">Saturday, 24th October 2026</p>
+                <p class="event-time reveal" style="--d:.3s">08:30 PM onwards</p>
+                <p class="event-details reveal" style="--d:.4s">A Night Under Stars</p>
+                <p class="event-venue reveal" style="--d:.5s">📍 Hari Priya Resort, Udaipur (Rajasthan)</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="page-gap reveal zoom" aria-hidden="true"><span>❖</span></div>
+
+    <!-- Family Compliments -->
+    <section class="wishes-section">
+        <div class="wishes-container">
+            <div class="wish-group reveal">
+                <h4>With Best Regards:</h4>
+                <p>Smt. Meena & Shri. Mukesh Rohira</p>
+                <p>Smt. Shobhna & Shri. Kishore Rohira</p>
+                <p>Smt. Sunita & Shri. Vinod Rohira</p>
+                <p>Smt. Sadhna & Shri. Ram Rohira</p>
+                <p>Smt. Anita & Shri. Shyam Rohira</p>
+            </div>
+
+            <div class="wish-group reveal" style="--d:.12s">
+                <h4>Awaited By:</h4>
+                <p>Mrs. Pooja and Mr. Amrish Bhavnani</p>
+                <p>Mrs. Priyanka and Mr. Bhupendra Gurbani</p>
+                <p>Mrs. Ankita and Mr. Prashant Lalwani</p>
+                <p>Mrs. Neha and Mr. Hunny Badlani</p>
+                <p>Mrs. Reshma and Mr. Tarun Lalchandani</p>
+                <p>Mrs. Harsha and Mr. Avinash Rohira</p>
+                <p>Mrs. Mahek and Mr. Gaurav Rohira</p>
+                <p>Mrs. Aarohi and Mr. Mohit Rohira</p>
+                <p>Sahil, Sarvesh, Harshita, Aniket, Ayush, Aditya</p>
+
+            </div>
+
+            <div class="wish-group reveal" style="--d:.24s">
+                <h4>Sweet Request:</h4>
+                <p>Dia, Yug, Siona, Aarav, Shubh, Kaveer, Keerat, Avyaan, Kiaan & Arya</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="reveal zoom">We Request The Honour Of Your Gracious Presence To Celebrate This Joyous Ceremony</p>
+    </footer>
+
+    <script>
+        /* ---------- Countdown (first event: Fri 23 Oct 2026, 8:30 PM IST) ---------- */
+        const weddingDate = new Date("2026-10-23T20:30:00+05:30").getTime();
+        const els = {
+            days: document.getElementById("days"),
+            hours: document.getElementById("hours"),
+            minutes: document.getElementById("minutes"),
+            seconds: document.getElementById("seconds")
+        };
+
+        function setValue(el, value) {
+            const text = String(value).padStart(2, "0");
+            if (el.textContent === text) return;
+            el.textContent = text;
+            el.classList.remove("tick");
+            void el.offsetWidth;            // restart the animation
+            el.classList.add("tick");
+        }
+
+        function updateCountdown() {
+            const distance = weddingDate - Date.now();
+
+            if (distance <= 0) {
+                clearInterval(timer);
+                document.querySelector(".countdown-container").innerHTML =
+                    "<h3 style='color: var(--deep-maroon); font-family: Cinzel, serif; font-size: calc(var(--u) * 4);'>The Celebration Has Begun!</h3>";
+                return;
+            }
+
+            setValue(els.days,    Math.floor(distance / 86400000));
+            setValue(els.hours,   Math.floor((distance % 86400000) / 3600000));
+            setValue(els.minutes, Math.floor((distance % 3600000) / 60000));
+            setValue(els.seconds, Math.floor((distance % 60000) / 1000));
+        }
+        const timer = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        /* ---------- Falling petals & sparkles (first page + each event page) ---------- */
+        (function buildFx() {
+            const small = window.matchMedia("(max-width: 600px)").matches;
+            const defaultColors = ["#E8A598", "#F7C6C0", "#D4AF37", "#F29A2E", "#FFD9A0"];
+            const rand = (min, max) => Math.random() * (max - min) + min;
+
+            function fill(fx, colors, petals, sparks) {
+                for (let i = 0; i < petals; i++) {
+                    const p = document.createElement("span");
+                    p.className = "petal";
+                    p.style.setProperty("--x", rand(0, 100) + "%");
+                    p.style.setProperty("--s", rand(9, 16) + "px");
+                    p.style.setProperty("--c", colors[Math.floor(Math.random() * colors.length)]);
+                    p.style.setProperty("--dur", rand(10, 18) + "s");
+                    p.style.setProperty("--delay", (-rand(0, 18)) + "s");
+                    p.style.setProperty("--sway", rand(-60, 60) + "px");
+                    fx.appendChild(p);
+                }
+                for (let i = 0; i < sparks; i++) {
+                    const s = document.createElement("span");
+                    s.className = "spark";
+                    s.style.setProperty("--x", rand(2, 98) + "%");
+                    s.style.setProperty("--y", rand(4, 96) + "%");
+                    s.style.setProperty("--s", rand(2, 4.5) + "px");
+                    s.style.setProperty("--dur", rand(2.5, 5) + "s");
+                    s.style.setProperty("--delay", rand(0, 5) + "s");
+                    fx.appendChild(s);
+                }
+            }
+
+            const hosts = Array.from(document.querySelectorAll(".hero, .page-card"));
+            const fxOf = (host) => host.querySelector(":scope > .fx");
+
+            hosts.forEach((host) => {
+                const isHero = host.classList.contains("hero");
+                const colors = host.dataset.petals ? host.dataset.petals.split(",") : defaultColors;
+                fill(fxOf(host), colors,
+                     isHero ? (small ? 12 : 22) : (small ? 8 : 14),
+                     isHero ? (small ? 10 : 18) : (small ? 6 : 10));
+            });
+
+            const setHeights = () => hosts.forEach((host) =>
+                fxOf(host).style.setProperty("--h", host.offsetHeight + "px"));
+            setHeights();
+            window.addEventListener("resize", setHeights);
+
+            // Only animate the page that is on screen (saves battery on phones)
+            if ("IntersectionObserver" in window) {
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        fxOf(entry.target).classList.toggle("paused", !entry.isIntersecting);
+                    });
+                }, { rootMargin: "120px" });
+                hosts.forEach((host) => io.observe(host));
+            }
+        })();
+
+        /* ---------- Scroll reveal ---------- */
+        (function scrollReveal() {
+            const items = document.querySelectorAll(".reveal");
+
+            function finish(el) {
+                // Hand the element back to its normal CSS so hover effects stay snappy
+                el.classList.remove("reveal", "visible", "from-left", "from-right", "zoom", "soft");
+            }
+            function show(el) {
+                el.classList.add("visible", "in-view");
+                el.addEventListener("transitionend", function onEnd(e) {
+                    if (e.target === el && e.propertyName === "opacity") {
+                        el.removeEventListener("transitionend", onEnd);
+                        finish(el);
+                    }
+                });
+                setTimeout(() => finish(el), 3200);
+            }
+
+            if (!("IntersectionObserver" in window)) {
+                items.forEach(show);
+                return;
+            }
+
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        show(entry.target);
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: "0px 0px -6% 0px" });
+
+            items.forEach((el) => io.observe(el));
+        })();
+
+        /* ---------- Scroll progress bar ---------- */
+        (function progressBar() {
+            const bar = document.getElementById("progress");
+            let ticking = false;
+            function update() {
+                const max = document.documentElement.scrollHeight - window.innerHeight;
+                const ratio = max > 0 ? window.scrollY / max : 0;
+                bar.style.transform = "scaleX(" + Math.min(1, Math.max(0, ratio)) + ")";
+                ticking = false;
+            }
+            window.addEventListener("scroll", () => {
+                if (!ticking) { requestAnimationFrame(update); ticking = true; }
+            }, { passive: true });
+            update();
+        })();
+
+        /* ---------- Music ---------- */
+        const music = document.getElementById("bgMusic");
+        const musicToggle = document.getElementById("musicToggle");
+        music.volume = 0.7;
+        let isPlaying = false;
+
+        function setPlaying(state) {
+            isPlaying = state;
+            musicToggle.textContent = state ? "⏸" : "▶";
+            musicToggle.classList.toggle("playing", state);
+            musicToggle.setAttribute("aria-pressed", String(state));
+            musicToggle.setAttribute("aria-label", state ? "Pause music" : "Play music");
+        }
+
+        // Phones and most browsers block autoplay, so we also start on the first tap.
+        const unlockEvents = ["click", "touchend", "keydown"];
+        function removeUnlock() {
+            unlockEvents.forEach((ev) => document.removeEventListener(ev, unlock));
+        }
+        function unlock(e) {
+            if (musicToggle.contains(e.target)) return;
+            const p = music.play();
+            if (p && p.then) {
+                p.then(() => { setPlaying(true); removeUnlock(); }).catch(() => {});
+            }
+        }
+
+        const autoplay = music.play();
+        if (autoplay && autoplay.then) {
+            autoplay.then(() => setPlaying(true)).catch(() => {
+                setPlaying(false);
+                unlockEvents.forEach((ev) => document.addEventListener(ev, unlock));
+            });
+        }
+
+        musicToggle.addEventListener("click", () => {
+            removeUnlock();
+            if (isPlaying) {
+                music.pause();
+                setPlaying(false);
+            } else {
+                const p = music.play();
+                if (p && p.then) p.then(() => setPlaying(true)).catch(() => setPlaying(false));
+                else setPlaying(true);
+            }
+        });
+    </script>
+</body>
+</html>

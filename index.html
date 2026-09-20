@@ -8,11 +8,27 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="invitation-bg.jpg">
-    <script>document.documentElement.classList.add('js');</script>
+    <script>
+        document.documentElement.classList.add('js');
+
+        /* If the logo or hashtag image can't load, show the same words as text instead */
+        function imgFallback(img) {
+            var el = document.createElement('div');
+            if (img.dataset.fallback === 'hashtag') {
+                el.className = 'hashtag-text';
+                el.textContent = '#salonifoundhersahil';
+            } else {
+                el.className = 'crest-text';
+                el.innerHTML = '<span class="crest-mono">SS</span><span class="crest-line">ALWAYS &middot; 24.10.26</span>';
+            }
+            img.replaceWith(el);
+        }
+    </script>
     <style>
         :root {
             --primary-gold: #D4AF37;
             --rose-pink: #E8A598;
+            --rose-gold: #AD7262;
             --soft-pink: #FFF5F5;
             --deep-maroon: #5C1D24;
             --text-dark: #333333;
@@ -579,6 +595,76 @@
             color: #555;
         }
 
+        /* ---------- Wedding crest & hashtag ---------- */
+        .crest-wrap { margin-bottom: 24px; }
+        .crest {
+            display: block;
+            width: clamp(120px, 36vw, 170px);
+            height: auto;
+            margin: 0 auto;
+            filter: drop-shadow(0 8px 14px rgba(173, 114, 98, .28));
+            animation: floatY 7s ease-in-out infinite;
+        }
+        .crest-text {
+            width: clamp(120px, 36vw, 160px);
+            aspect-ratio: 1;
+            margin: 0 auto;
+            border: 2px solid var(--rose-gold);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--rose-gold);
+            font-family: 'Cinzel', serif;
+        }
+        .crest-mono { font-size: 2.6rem; line-height: 1; letter-spacing: .04em; }
+        .crest-line { font-size: .55rem; letter-spacing: .22em; margin-top: 8px; }
+
+        .hashtag-section {
+            padding: 70px 20px 64px;
+            background: #ffffff;
+            border-top: 1px solid #f0d5d0;
+        }
+        .hashtag-caption {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 14px;
+            font-family: 'Cinzel', serif;
+            font-size: .72rem;
+            letter-spacing: .26em;
+            text-transform: uppercase;
+            color: #8A5A4D;
+        }
+        .hashtag-caption::before,
+        .hashtag-caption::after {
+            content: '';
+            width: min(12vw, 48px);
+            height: 1px;
+            background: var(--primary-gold);
+            opacity: .8;
+        }
+        .hashtag-img {
+            display: block;
+            width: min(94%, 560px);
+            height: auto;
+            margin: 0 auto;
+        }
+        /* The hashtag "writes itself" from left to right when it scrolls into view */
+        .js .hashtag-img {
+            clip-path: inset(0 100% 0 0);
+            transition: clip-path 2.6s cubic-bezier(.65, 0, .35, 1) .35s;
+        }
+        .js .hashtag-wrap.in-view .hashtag-img { clip-path: inset(0 0 0 0); }
+        .hashtag-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.1rem, 9vw, 3.4rem);
+            line-height: 1.2;
+            color: var(--rose-gold);
+        }
+
         /* ---------- Footer ---------- */
         footer {
             background-color: var(--deep-maroon);
@@ -661,6 +747,8 @@
             .details { font-size: .9rem; }
 
             .section-title { font-size: 1.45rem; letter-spacing: 1px; }
+            .hashtag-caption::before,
+            .hashtag-caption::after { display: none; }
             footer { font-size: .8rem; }
         }
 
@@ -748,6 +836,11 @@
 
     <!-- Schedule of Events: one full page per celebration -->
     <section class="events-intro">
+        <div class="crest-wrap reveal zoom">
+            <img class="crest" src="logo-ss.png" width="720" height="739"
+                 alt="SS monogram, Always, 24.10.26"
+                 data-fallback="crest" onerror="imgFallback(this)">
+        </div>
         <h2 class="section-title reveal">Wedding Celebrations</h2>
     </section>
 
@@ -832,6 +925,16 @@
                 <h4>Sweet Request:</h4>
                 <p>Dia, Yug, Siona, Aarav, Shubh, Kaveer, Keerat, Avyaan, Kiaan & Arya</p>
             </div>
+        </div>
+    </section>
+
+    <!-- Hashtag -->
+    <section class="hashtag-section">
+        <div class="hashtag-wrap reveal">
+            <p class="hashtag-caption">Share your moments with</p>
+            <img class="hashtag-img" src="hashtag.png" width="1400" height="283" loading="lazy"
+                 alt="#salonifoundhersahil"
+                 data-fallback="hashtag" onerror="imgFallback(this)">
         </div>
     </section>
 
